@@ -1,0 +1,13 @@
+{
+    "title": " डेमो",
+    "welcome": "वेलकम टू डेमो पेज",
+    "getStarted": "संपादन से आरंभ करें",
+    "documentation": "प्रलेखन",
+    "documentationDescription": "Next.js सुविधाओं और API के बारे में गहराई से जानकारी प्राप्त करें।",
+    "learn": "सीखना",
+    "learnDescription": "क्विज़ के साथ एक इंटरैक्टिव पाठ्यक्रम में Next.js के बारे में जानें!",
+    "examples": "उदाहरण",
+    "examplesDescription": "डिस्कवर और बॉयलरप्लेट उदाहरण को तैनात करें। Next.js परियोजनाएं।",
+    "deploy": "तैनाती",
+    "deployDescription": "Vercel के साथ अपने Next.js साइट को तुरंत एक सार्वजनिक URL पर तैनात करें।"
+}

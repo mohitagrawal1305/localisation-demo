@@ -1,50 +1,57 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import getLabels from '../helper/getlabels'
+import { withLabels } from '../hooks/withLabels'
+import LangSwitcher from '../components/langSwitcher'
 
-export default function Home() {
+export default function Home( { labels, lang } ) {
+
+  const { t } = withLabels( labels );
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>{ t( 'title' ) } </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          { t( 'welcome' ) }
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          { t( 'getStarted' ) }{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
+        <LangSwitcher selected = { lang } />
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
+            <h3>{ t( 'documentation' ) } &rarr;</h3>
+            <p>{ t( 'documentationDescription' ) }</p>
           </a>
 
           <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+            <h3>{ t( 'learn' ) } &rarr;</h3>
+            <p>{ t( 'learnDescription' ) }</p>
           </a>
 
           <a
             href="https://github.com/vercel/next.js/tree/master/examples"
             className={styles.card}
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
+            <h3>{ t( 'examples' ) } &rarr;</h3>
+            <p>{ t( 'examplesDescription' ) }</p>
           </a>
 
           <a
             href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             className={styles.card}
           >
-            <h3>Deploy &rarr;</h3>
+            <h3>{ t( 'deploy' ) } &rarr;</h3>
             <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
+              { t( 'deployDescription' ) }
             </p>
           </a>
         </div>
@@ -62,4 +69,29 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+// export async function getStaticProps() {
+
+//   const labels = getLabels( 'home.json' );
+
+//   return {
+//     props: {
+//       labels
+//     }
+//   };
+// };
+
+export async function getServerSideProps({ req }) {
+
+  const lang = /lang=hi/.test( req?.headers?.cookie ) ? 'hi' : 'en';
+
+  const labels = getLabels( 'home.json', lang );
+
+  return {
+    props: {
+      labels,
+      lang
+    }, // will be passed to the page component as props
+  }
 }
